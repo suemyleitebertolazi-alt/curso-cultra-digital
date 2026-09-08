@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cultura Digital na Gestão Pública | UFMT</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#0056b3',
+                            600: '#004494',
+                            700: '#003373',
+                            800: '#002554',
+                            900: '#001938'
+                        },
+                        sus: {
+                            blue: '#005CA9',
+                            green: '#00A859',
+                            yellow: '#FFCC00'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(229, 231, 235, 0.8);
+        }
+        .dark .glass-panel {
+            background: rgba(17, 24, 39, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(55, 65, 81, 0.8);
+        }
+        
+        /* Markdown Styles for AI Response */
+        .ai-response-content p { margin-bottom: 0.75rem; }
+        .ai-response-content p:last-child { margin-bottom: 0; }
+        .ai-response-content strong { color: inherit; font-weight: 700; }
+        .ai-response-content ul { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 0.75rem; }
+        .ai-response-content ol { list-style-type: decimal; margin-left: 1.5rem; margin-bottom: 0.75rem; }
+        .ai-response-content li { margin-bottom: 0.25rem; }
+        .ai-response-content a { color: #0ea5e9; text-decoration: underline; }
+        .ai-response-content code { background-color: rgba(125, 125, 125, 0.2); padding: 0.1rem 0.3rem; border-radius: 0.25rem; font-family: monospace; font-size: 0.9em; }
+    </style>
+</head>
+<body class="h-full bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 flex flex-col transition-colors duration-200">
+
+    <!-- Top Navigation Header -->
+    <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-800/90 backdrop-blur border-b border-slate-200 dark:border-slate-700 shadow-sm">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2">
+            <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+                <button id="toggleSidebarBtn" aria-label="Abrir Menu" class="lg:hidden p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg active:scale-95 transition-transform">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+                <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+                    <!-- Quadrus Azul UFMT com letra reduzida para ambos (mobile e desktop) -->
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-brand-800 via-brand-600 to-blue-500 text-white flex items-center justify-center font-black text-xs sm:text-sm shadow-lg border border-white/20 shrink-0 tracking-wider">
+                        UFMT
+                    </div>
+                    <!-- Títulos com texto completo sem "..." no mobile -->
+                    <div class="min-w-0 flex-1">
+                        <span class="text-[10px] sm:text-xs font-semibold tracking-wider text-brand-600 dark:text-blue-400 uppercase block leading-tight">Curso de Extensão</span>
+                        <h1 class="text-xs sm:text-sm md:text-base font-bold text-slate-900 dark:text-white leading-tight">Cultura Digital na Gestão Pública</h1>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Global Controls & Progress -->
+            <div class="flex items-center gap-1.5 sm:gap-4 shrink-0">
+                <!-- Mini Progress Bar (Oculto no mobile, visível apenas em telas sm/desktop) -->
+                <div class="hidden sm:flex items-center gap-2 bg-slate-100 dark:bg-slate-700/60 px-2 sm:px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-600">
+                    <div class="text-[11px] sm:text-xs font-medium text-slate-600 dark:text-slate-300">
+                        <span class="hidden sm:inline">Progresso: </span><span id="headerProgressTxt" class="font-bold text-brand-600 dark:text-blue-400">0%</span>
+                    </div>
+                    <div class="w-12 sm:w-24 bg-slate-200 dark:bg-slate-600 h-2 rounded-full overflow-hidden">
+                        <div id="headerProgressBar" class="bg-gradient-to-r from-blue-500 to-brand-600 h-full w-0 transition-all duration-500"></div>
+                    </div>
+                </div>
+
+                <!-- Theme Toggle -->
+                <button id="themeToggleBtn" title="Alternar Tema" aria-label="Alternar Tema" class="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors active:scale-95">
+                    <i class="fa-solid fa-moon dark:hidden text-base sm:text-lg"></i>
+                    <i class="fa-solid fa-sun hidden dark:inline text-base sm:text-lg text-amber-400"></i>
+                </button>
+
+                <!-- Sound FX Toggle -->
+                <button id="soundToggleBtn" title="Som de Interação" aria-label="Som de Interação" class="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors active:scale-95">
+                    <i id="soundIcon" class="fa-solid fa-volume-high text-base sm:text-lg"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Floating Top-Right Horizontal Progress Container (Visível apenas em dispositivos móveis) -->
+    <div id="mobileSideProgressContainer" class="sm:hidden fixed top-[68px] right-3 z-40 flex items-center gap-2 bg-white/95 dark:bg-slate-800/95 backdrop-blur-md px-3 py-1.5 rounded-full shadow-lg border border-slate-200/80 dark:border-slate-700/80 transition-all duration-300">
+        <div class="flex items-center gap-1">
+            <i class="fa-solid fa-chart-line text-brand-600 dark:text-blue-400 text-xs"></i>
+            <span class="text-[9px] font-extrabold text-slate-400 dark:text-slate-500 uppercase tracking-tight">Prog.</span>
+            <span id="mobileSideProgressTxt" class="text-xs font-black text-brand-600 dark:text-blue-400">0%</span>
+        </div>
+        <div class="w-14 h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden border border-slate-300/40 dark:border-slate-600/40 p-0.5">
+            <div id="mobileSideProgressBar" class="h-full bg-gradient-to-r from-brand-600 to-blue-400 rounded-full w-0 transition-all duration-500"></div>
+        </div>
+    </div>
+
+    <!-- Main Content Layout -->
+    <div class="flex-1 max-w-7xl w-full mx-auto flex overflow-hidden">
+        
+        <!-- Sidebar Navigation Drawer -->
+        <aside id="sidebar" class="fixed lg:static inset-y-0 left-0 z-30 w-72 max-w-[85vw] bg-white dark:bg-slate-800 border-r border-slate-200 dark:border-slate-700 flex flex-col transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out shadow-xl lg:shadow-none">
+            <!-- Sidebar Header & Student Profile -->
+            <div class="p-4 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-slate-700 text-brand-600 dark:text-blue-400 flex items-center justify-center font-bold text-base border border-blue-200 dark:border-slate-600">
+                        <i class="fa-solid fa-user-graduate"></i>
+                    </div>
+                    <div class="flex-1 overflow-hidden">
+                        <input type="text" id="studentNameInput" value="Cursista de Administração" class="w-full bg-transparent font-semibold text-sm text-slate-800 dark:text-white border-b border-dashed border-slate-300 dark:border-slate-600 focus:outline-none focus:border-brand-500 truncate" title="Clique para editar seu nome">
+                        <span class="text-xs text-slate-500 dark:text-slate-400 block">Clique no nome para editar</span>
+                    </div>
+                </div>
+
+                <!-- Academic Info -->
+                <div class="text-[11px] text-slate-500 dark:text-slate-400 space-y-0.5 border-t border-slate-200 dark:border-slate-700 pt-2">
+                    <p class="font-medium text-slate-700 dark:text-slate-300">UFMT - Faculdade de Administração</p>
+                    <p>Bacharelado em Admin. Pública (PNAP)</p>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="flex-1 overflow-y-auto custom-scrollbar p-3 space-y-1">
+                <div class="px-3 py-1 text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
+                    Módulos do Curso
+                </div>
+
+                <button onclick="navigateTo('intro')" id="nav-intro" class="nav-btn w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium flex items-center gap-3 transition-colors bg-brand-50 text-brand-700 dark:bg-slate-700 dark:text-blue-400 font-semibold">
+                    <i class="fa-solid fa-house text-base w-5 text-center"></i>
+                    <span class="flex-1 truncate">Apresentação e Visão Geral</span>
+                </button>
+
+                <button onclick="navigateTo('lesson1')" id="nav-lesson1" class="nav-btn w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium flex items-center gap-3 transition-colors text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-700/50">
+                    <i class="fa-solid fa-book-open text-base w-5 text-center text-slate-400"></i>
+                    <div class="flex-1 truncate flex items-center justify-between">
+                        <span>Lição 1: O Caos do Papel</span>
+                        <i id="check-lesson1" class="fa-solid fa-circle-check text-emerald-500 hidden text-sm"></i>
+                    </div>
+                </button>
+
+                <button onclick="navigateTo('lesson2')" id="nav-lesson2" class="nav-btn w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium flex items-center gap-3 transition-colors text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-700/50">
+                    <i class="fa-solid fa-layer-group text-base w-5 text-center text-slate-400"></i>
+                    <div class="flex-1 truncate flex items-center justify-between">
+                        <span>Lição 2: A Realidade Bate</span>
+                        <i id="check-lesson2" class="fa-solid fa-circle-check text-emerald-500 hidden text-sm"></i>
+                    </div>
+                </button>
+
+                <button onclick="navigateTo('lesson3')" id="nav-lesson3" class="nav-btn w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium flex items-center gap-3 transition-colors text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-700/50">
+                    <i class="fa-solid fa-heart-pulse text-base w-5 text-center text-slate-400"></i>
+                    <div class="flex-1 truncate flex items-center justify-between">
+                        <span>Lição 3: SUS Digital & Legado</span>
+                        <i id="check-lesson3" class="fa-solid fa-circle-check text-emerald-500 hidden text-sm"></i>
+                    </div>
+                </button>
+
+                <div class="pt-3 pb-1 px-3 text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
+                    Atividades & Prática
+                </div>
+
+                <button onclick="navigateTo('quiz')" id="nav-quiz" class="nav-btn w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium flex items-center gap-3 transition-colors text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-700/50">
+                    <i class="fa-solid fa-list-check text-base w-5 text-center text-amber-500"></i>
+                    <div class="flex-1 truncate flex items-center justify-between">
+                        <span>Quiz de Conhecimento</span>
+                        <i id="check-quiz" class="fa-solid fa-circle-check text-emerald-500 hidden text-sm"></i>
+                    </div>
+                </button>
+
+                <div class="pt-3 pb-1 px-3 text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
+                    Recursos Adicionais
+                </div>
+
+                <button onclick="navigateTo('aiTutor')" id="nav-aiTutor" class="nav-btn w-full text-left px-3 py-2.5 rounded-xl text-sm font-medium flex items-center gap-3 transition-colors text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-700/50">
+                    <i class="fa-solid fa-robot text-base w-5 text-center text-emerald-500"></i>
+                    <span class="flex-1 truncate">Assistente Virtual</span>
+                </button>
+            </nav>
+
+            <!-- Sidebar Footer / Authors -->
+            <div class="p-3 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-[11px] text-slate-500 dark:text-slate-400">
+                <p class="font-semibold mb-1 text-slate-700 dark:text-slate-300">Autoria e Produção:</p>
+                <p class="truncate">Ailton Caldeira • Amanda Souza</p>
+                <p class="truncate">Fabio Almeida • Suemy Bertolazi</p>
+                <p class="truncate">Tatiane Gomes</p>
+            </div>
+        </aside>
+
+        <!-- Sidebar Overlay on Mobile -->
+        <div id="sidebarOverlay" onclick="toggleSidebar()" class="fixed inset-0 bg-slate-900/50 z-20 hidden lg:hidden backdrop-blur-sm"></div>
+
+        <!-- Main Content View Area -->
+        <main class="flex-1 overflow-y-auto custom-scrollbar p-3 pb-24 sm:p-6 lg:p-8">
+            <div class="max-w-4xl mx-auto space-y-6 sm:space-y-8">
+
+                <!-- VIEW 0: APRESENTAÇÃO / INTRO -->
+                <section id="view-intro" class="view-section space-y-6">
+                    <!-- Banner Card -->
+                    <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-brand-800 via-brand-600 to-blue-600 text-white p-5 sm:p-8 shadow-xl">
+                        <div class="absolute right-0 top-0 -mt-10 -mr-10 opacity-10 pointer-events-none">
+                            <i class="fa-solid fa-hospital-user text-[180px] sm:text-[240px]"></i>
+                        </div>
+                        <div class="relative z-10 max-w-2xl">
+                            <span class="inline-block bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-[11px] sm:text-xs font-semibold tracking-wide uppercase mb-3">
+                                Módulo de Saúde Pública
+                            </span>
+                            <h2 class="text-xl sm:text-3xl font-extrabold font-serif mb-3 leading-tight">
+                                A Transformação Digital na Saúde Pública
+                            </h2>
+                            <p class="text-blue-100 text-xs sm:text-base leading-relaxed mb-6">
+                                O Legado do Programa <strong>Informatiza APS</strong> e a evolução do modelo de gestão da saúde no Brasil.
+                            </p>
+                            <div class="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3">
+                                <button onclick="navigateTo('lesson1')" class="bg-white text-brand-800 hover:bg-blue-50 px-5 py-3 sm:py-2.5 rounded-xl font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2 active:scale-95">
+                                    <span>Iniciar Lição 1</span>
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                                <a href="https://aps.saude.gov.br/ape/esus" target="_blank" rel="noopener noreferrer" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-3 sm:py-2.5 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2 shadow-sm active:scale-95">
+                                    <i class="fa-solid fa-globe"></i>
+                                    <span>Portal e-SUS APS</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-75"></i>
+                                </a>
+                                <button onclick="navigateTo('aiTutor')" class="bg-brand-900/50 hover:bg-brand-900/80 text-white border border-white/30 px-4 py-3 sm:py-2.5 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2 active:scale-95">
+                                    <i class="fa-solid fa-robot"></i>
+                                    <span>Tirar Dúvidas com IA</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Intro Text Content -->
+                    <div class="glass-panel rounded-2xl p-6 sm:p-8 shadow-sm space-y-4">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                            <i class="fa-solid fa-hand-wave text-amber-500"></i>
+                            Olá, Cursista! Seja Bem-vindo(a)!
+                        </h3>
+                        
+                        <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                            Você já parou para pensar como o histórico médico de milhões de brasileiros saiu das velhas pastas de papel para a tela do computador? Nesta etapa do curso, vamos sair da teoria e analisar um caso real de impacto nacional: o <strong>Programa Informatiza APS</strong>.
+                        </p>
+
+                        <div class="bg-blue-50 dark:bg-slate-800/80 border-l-4 border-brand-500 p-4 rounded-r-xl">
+                            <h4 class="font-bold text-brand-700 dark:text-blue-400 text-sm mb-1 flex items-center gap-2">
+                                <i class="fa-solid fa-compass"></i>
+                                O que você aprenderá neste módulo:
+                            </h4>
+                            <ul class="text-sm text-slate-700 dark:text-slate-300 space-y-1.5 list-disc list-inside">
+                                <li>Como o Estado utilizou incentivos financeiros para promover a Cultura Digital nos postos de saúde.</li>
+                                <li>Os principais obstáculos reais da implementação (spoiler: não basta apenas comprar computadores).</li>
+                                <li>As lições que este programa deixou para o atual modelo do <strong>SUS Digital</strong>.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Quick Access Portal Banner -->
+                        <div class="p-4 rounded-xl bg-gradient-to-r from-blue-900 to-sus-blue text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-md">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-lg shrink-0">
+                                    <i class="fa-solid fa-laptop-medical"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm">Acesse a Plataforma Oficial do e-SUS Digital</h4>
+                                    <p class="text-xs text-blue-100">Conheça os manuais, aplicativos e o Prontuário Eletrônico do Cidadão (PEC).</p>
+                                </div>
+                            </div>
+                            <a href="https://aps.saude.gov.br/ape/esus" target="_blank" rel="noopener noreferrer" class="px-4 py-2 bg-amber-400 hover:bg-amber-300 text-slate-900 rounded-lg font-bold text-xs transition-colors shrink-0 flex items-center gap-1.5">
+                                Acessar e-SUS Digital
+                                <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                            </a>
+                        </div>
+
+                        <!-- Course Stats Grid -->
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-slate-200 dark:border-slate-700">
+                            <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-100 dark:bg-slate-800/50">
+                                <i class="fa-solid fa-clock text-2xl text-brand-500"></i>
+                                <div>
+                                    <div class="text-xs text-slate-500">Carga Horária</div>
+                                    <div class="font-bold text-sm">4 Horas Estimadas</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-100 dark:bg-slate-800/50">
+                                <i class="fa-solid fa-graduation-cap text-2xl text-purple-500"></i>
+                                <div>
+                                    <div class="text-xs text-slate-500">Nível</div>
+                                    <div class="font-bold text-sm">Administração Pública</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-100 dark:bg-slate-800/50">
+                                <i class="fa-solid fa-check-double text-2xl text-emerald-500"></i>
+                                <div>
+                                    <div class="text-xs text-slate-500">Avaliação</div>
+                                    <div class="font-bold text-sm">Quiz de Conhecimento</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VIEW 1: LIÇÃO 1 -->
+                <section id="view-lesson1" class="view-section hidden space-y-6">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-700 pb-4">
+                        <div>
+                            <span class="text-xs font-bold text-brand-600 dark:text-blue-400 uppercase tracking-wider">Lição 1 de 3</span>
+                            <h2 class="text-xl sm:text-2xl font-bold font-serif text-slate-900 dark:text-white leading-tight">O Caos do Papel e a Estratégia do Informatiza APS</h2>
+                        </div>
+                        <button onclick="toggleLessonComplete('lesson1')" id="btnComplete-lesson1" class="w-full sm:w-auto px-4 py-2.5 sm:py-2 rounded-xl text-xs font-bold border transition-colors flex items-center justify-center gap-2 border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">
+                            <i class="fa-regular fa-circleCheck text-base"></i>
+                            <span>Marcar Concluída</span>
+                        </button>
+                    </div>
+
+                    <div class="glass-panel rounded-2xl p-4 sm:p-8 shadow-sm space-y-6">
+                        <div class="prose dark:prose-invert max-w-none space-y-4 text-slate-700 dark:text-slate-300 leading-relaxed">
+                            <p class="text-lg font-medium text-slate-800 dark:text-slate-200 italic border-l-4 border-amber-500 pl-4 py-1 bg-amber-500/5 rounded-r-lg">
+                                "Como futuro(a) administrador(a) público(a), imagine o seguinte cenário: um paciente chega ao posto de saúde, mas o histórico dele está espalhado em várias pastas de papel, rasgadas ou até perdidas."
+                            </p>
+
+                            <p>
+                                Como o médico pode tomar uma boa decisão clínica nessas condições? Como você, gestor, pode planejar a compra de remédios se não tem dados rápidos sobre os atendimentos efetuados?
+                            </p>
+
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white pt-2 flex items-center gap-2">
+                                <i class="fa-solid fa-lightbulb text-amber-500"></i>
+                                O "Pulo do Gato" da Gestão Pública
+                            </h3>
+
+                            <p>
+                                Foi para resolver esse problema público que o Ministério da Saúde criou, em 2019, o programa <strong>Informatiza APS</strong>. Mas aqui vai o grande segredo da gestão pública eficiente: o governo não saiu apenas distribuindo computadores. A política pública utilizou o <strong>financiamento como ferramenta de mudança de comportamento</strong>.
+                            </p>
+
+                            <!-- Process Flow Graphic -->
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
+                                <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm text-center">
+                                    <div class="w-10 h-10 mx-auto rounded-full bg-blue-100 text-brand-600 flex items-center justify-center font-bold mb-2">1</div>
+                                    <h4 class="font-bold text-sm mb-1">Prontuário Eletrônico</h4>
+                                    <p class="text-xs text-slate-500">Uso obrigatório do Prontuário Eletrônico do Cidadão (PEC).</p>
+                                </div>
+                                <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm text-center">
+                                    <div class="w-10 h-10 mx-auto rounded-full bg-blue-100 text-brand-600 flex items-center justify-center font-bold mb-2">2</div>
+                                    <h4 class="font-bold text-sm mb-1">Comprovação de Dados</h4>
+                                    <p class="text-xs text-slate-500">Envio contínuo dos dados de saúde para o Governo Federal.</p>
+                                </div>
+                                <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-sm text-center border-l-4 border-l-rose-500">
+                                    <div class="w-10 h-10 mx-auto rounded-full bg-rose-100 text-rose-600 flex items-center justify-center font-bold mb-2">3</div>
+                                    <h4 class="font-bold text-sm mb-1">Incentivo / Sanção</h4>
+                                    <p class="text-xs text-slate-500">Ficar 3 meses sem enviar dados resultava na suspensão do repasse.</p>
+                                </div>
+                            </div>
+
+                            <p>
+                                O resultado? Uma <strong>adesão em massa</strong>! Em 2020, mais de 29 mil equipes de saúde em mais de 4 mil municípios já estavam informatizadas. O dado clínico começou a virar informação estratégica para a gestão.
+                            </p>
+                        </div>
+
+                        <!-- Video Resources & Links Box -->
+                        <div class="p-5 rounded-2xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-4 my-6">
+                            <h4 class="font-bold text-slate-900 dark:text-white text-sm uppercase tracking-wider flex items-center gap-2">
+                                <i class="fa-solid fa-circle-play text-rose-500 text-lg"></i>
+                                Vídeos e Links Recomendados para Aprofundamento:
+                            </h4>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <!-- Video 1 -->
+                                <a href="https://www.youtube.com/watch?v=wuMpGbe0hEk" target="_blank" rel="noopener noreferrer" class="p-3 bg-white dark:bg-slate-700/60 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-brand-500 transition-all flex items-start gap-3 group shadow-sm">
+                                    <div class="w-10 h-10 rounded-lg bg-rose-100 dark:bg-rose-950 text-rose-600 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                                        <i class="fa-brands fa-youtube text-lg"></i>
+                                    </div>
+                                    <div class="overflow-hidden">
+                                        <h5 class="text-xs font-bold text-slate-900 dark:text-white truncate group-hover:text-brand-600 dark:group-hover:text-blue-400">Vídeo: A Estratégia e-SUS APS</h5>
+                                        <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Assista para ver o Prontuário Eletrônico em funcionamento na prática.</p>
+                                        <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-brand-600 dark:text-blue-400 mt-1">
+                                            Assistir no YouTube <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                        </span>
+                                    </div>
+                                </a>
+
+                                <!-- Video 2 -->
+                                <a href="https://www.youtube.com/watch?v=YFb7YtnvDxc" target="_blank" rel="noopener noreferrer" class="p-3 bg-white dark:bg-slate-700/60 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-brand-500 transition-all flex items-start gap-3 group shadow-sm">
+                                    <div class="w-10 h-10 rounded-lg bg-rose-100 dark:bg-rose-950 text-rose-600 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                                        <i class="fa-brands fa-youtube text-lg"></i>
+                                    </div>
+                                    <div class="overflow-hidden">
+                                        <h5 class="text-xs font-bold text-slate-900 dark:text-white truncate group-hover:text-brand-600 dark:group-hover:text-blue-400">Vídeo: O que é o Informatiza APS?</h5>
+                                        <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Explicação dinâmica sobre o financiamento e as metas do programa.</p>
+                                        <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-brand-600 dark:text-blue-400 mt-1">
+                                            Assistir no YouTube <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                        </span>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <!-- Official Portal Link -->
+                            <div class="pt-2">
+                                <a href="https://aps.saude.gov.br/ape/esus" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 bg-sus-blue hover:bg-blue-800 text-white text-xs font-bold rounded-xl transition-all shadow-sm">
+                                    <i class="fa-solid fa-globe"></i>
+                                    <span>Acessar Portal Oficial e-SUS Digital (Ministério da Saúde)</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Navigation Footer -->
+                        <div class="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 pt-6 border-t border-slate-200 dark:border-slate-700">
+                            <button onclick="navigateTo('intro')" class="px-4 py-2.5 sm:py-2 text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 font-medium text-center">
+                                <i class="fa-solid fa-arrow-left mr-1"></i> Anterior
+                            </button>
+                            <button onclick="navigateTo('lesson2')" class="bg-brand-600 hover:bg-brand-700 text-white px-5 py-3 sm:py-2.5 rounded-xl font-bold text-sm shadow transition-all flex items-center justify-center gap-2 active:scale-95">
+                                Próxima: Lição 2 <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VIEW 2: LIÇÃO 2 -->
+                <section id="view-lesson2" class="view-section hidden space-y-6">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-700 pb-4">
+                        <div>
+                            <span class="text-xs font-bold text-brand-600 dark:text-blue-400 uppercase tracking-wider">Lição 2 de 3</span>
+                            <h2 class="text-xl sm:text-2xl font-bold font-serif text-slate-900 dark:text-white leading-tight">A Realidade Bate à Porta: Muito Além dos Computadores</h2>
+                        </div>
+                        <button onclick="toggleLessonComplete('lesson2')" id="btnComplete-lesson2" class="w-full sm:w-auto px-4 py-2.5 sm:py-2 rounded-xl text-xs font-bold border transition-colors flex items-center justify-center gap-2 border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">
+                            <i class="fa-regular fa-circleCheck text-base"></i>
+                            <span>Marcar Concluída</span>
+                        </button>
+                    </div>
+
+                    <div class="glass-panel rounded-2xl p-4 sm:p-8 shadow-sm space-y-6">
+                        <p class="text-slate-700 dark:text-slate-300 leading-relaxed">
+                            Tudo parece perfeito no papel (ou na tela), certo? Mas, na Administração Pública, a implementação de uma política é onde os verdadeiros desafios aparecem.
+                        </p>
+
+                        <p class="text-slate-700 dark:text-slate-300 leading-relaxed">
+                            Nesta lição, vamos desconstruir o mito de que <em>"a tecnologia resolve tudo sozinha"</em>. A experiência do Informatiza APS nos ensinou que a Cultura Digital enfrenta três barreiras estruturais crônicas:
+                        </p>
+
+                        <!-- Interactive Accordion Cards for Obstacles -->
+                        <div class="space-y-4 my-6">
+                            <!-- Obstacle 1 -->
+                            <div class="p-5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/80 shadow-sm hover:border-brand-300 transition-all">
+                                <div class="flex items-start gap-4">
+                                    <div class="p-3 bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300 rounded-xl">
+                                        <i class="fa-solid fa-wifi text-xl"></i>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <h4 class="font-bold text-slate-900 dark:text-white text-base">1. O "Apagão" de Infraestrutura</h4>
+                                        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                                            Muitos postos de saúde sequer tinham internet estável ou computadores que não travassem. Como exigir dados em tempo real se a conexão cai toda hora?
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Obstacle 2 -->
+                            <div class="p-5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/80 shadow-sm hover:border-brand-300 transition-all">
+                                <div class="flex items-start gap-4">
+                                    <div class="p-3 bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300 rounded-xl">
+                                        <i class="fa-solid fa-users-gear text-xl"></i>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <h4 class="font-bold text-slate-900 dark:text-white text-base">2. O Fator Humano (Capacitação)</h4>
+                                        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                                            Mudar do papel para a tela altera a rotina de trabalho. Sem letramento digital e treinamento contínuo, a ferramenta vira um peso para o servidor público, e não uma solução.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Obstacle 3 -->
+                            <div class="p-5 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/80 shadow-sm hover:border-brand-300 transition-all">
+                                <div class="flex items-start gap-4">
+                                    <div class="p-3 bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300 rounded-xl">
+                                        <i class="fa-solid fa-user-shield text-xl"></i>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <h4 class="font-bold text-slate-900 dark:text-white text-base">3. Privacidade e LGPD</h4>
+                                        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                                            Dados de saúde são considerados dados sensíveis pela Lei Geral de Proteção de Dados. O gestor público precisou aprender a lidar com perfis de acesso e segurança cibernética para não expor a vida íntima do cidadão.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Video Resources for Lesson 2 -->
+                        <div class="p-5 rounded-2xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-4 my-6">
+                            <h4 class="font-bold text-slate-900 dark:text-white text-sm uppercase tracking-wider flex items-center gap-2">
+                                <i class="fa-solid fa-circle-play text-rose-500 text-lg"></i>
+                                Vídeos Recomendados (LGPD & Prática):
+                            </h4>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <!-- Video 1 -->
+                                <a href="https://www.youtube.com/watch?v=hvkOgo1dxq4" target="_blank" rel="noopener noreferrer" class="p-3 bg-white dark:bg-slate-700/60 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-brand-500 transition-all flex items-start gap-3 group shadow-sm">
+                                    <div class="w-10 h-10 rounded-lg bg-rose-100 dark:bg-rose-950 text-rose-600 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                                        <i class="fa-brands fa-youtube text-lg"></i>
+                                    </div>
+                                    <div class="overflow-hidden">
+                                        <h5 class="text-xs font-bold text-slate-900 dark:text-white truncate group-hover:text-brand-600 dark:group-hover:text-blue-400">Vídeo: LGPD para Profissionais de Saúde</h5>
+                                        <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Minuto Saúde Digital - UFSC sobre cuidados com dados de pacientes.</p>
+                                        <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-brand-600 dark:text-blue-400 mt-1">
+                                            Assistir no YouTube <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                        </span>
+                                    </div>
+                                </a>
+
+                                <!-- Video 2 -->
+                                <a href="https://www.youtube.com/watch?v=7u22MLKpVV8" target="_blank" rel="noopener noreferrer" class="p-3 bg-white dark:bg-slate-700/60 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-brand-500 transition-all flex items-start gap-3 group shadow-sm">
+                                    <div class="w-10 h-10 rounded-lg bg-rose-100 dark:bg-rose-950 text-rose-600 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                                        <i class="fa-brands fa-youtube text-lg"></i>
+                                    </div>
+                                    <div class="overflow-hidden">
+                                        <h5 class="text-xs font-bold text-slate-900 dark:text-white truncate group-hover:text-brand-600 dark:group-hover:text-blue-400">Vídeo: O Impacto da LGPD na Saúde Digital</h5>
+                                        <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Debate técnico do COSEMS-SP sobre privacidade na gestão pública.</p>
+                                        <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-brand-600 dark:text-blue-400 mt-1">
+                                            Assistir no YouTube <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                        </span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Highlight Reflection Box -->
+                        <div class="bg-gradient-to-r from-brand-900 to-slate-900 text-white p-6 rounded-2xl shadow-md border border-brand-700">
+                            <h4 class="font-bold text-amber-400 text-sm uppercase tracking-wider mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-brain"></i>
+                                Reflexão Crítica para o Gestor
+                            </h4>
+                            <p class="text-base sm:text-lg font-serif italic text-slate-100">
+                                "A transformação digital não é um projeto de TI (Tecnologia da Informação), é um projeto de pessoas e processos."
+                            </p>
+                        </div>
+
+                        <!-- Navigation Footer -->
+                        <div class="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 pt-6 border-t border-slate-200 dark:border-slate-700">
+                            <button onclick="navigateTo('lesson1')" class="px-4 py-2.5 sm:py-2 text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 font-medium text-center">
+                                <i class="fa-solid fa-arrow-left mr-1"></i> Anterior
+                            </button>
+                            <button onclick="navigateTo('lesson3')" class="bg-brand-600 hover:bg-brand-700 text-white px-5 py-3 sm:py-2.5 rounded-xl font-bold text-sm shadow transition-all flex items-center justify-center gap-2 active:scale-95">
+                                Próxima: Lição 3 <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VIEW 3: LIÇÃO 3 -->
+                <section id="view-lesson3" class="view-section hidden space-y-6">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-700 pb-4">
+                        <div>
+                            <span class="text-xs font-bold text-brand-600 dark:text-blue-400 uppercase tracking-wider">Lição 3 de 3</span>
+                            <h2 class="text-xl sm:text-2xl font-bold font-serif text-slate-900 dark:text-white leading-tight">O Fim do Programa e as Lições para o SUS Digital</h2>
+                        </div>
+                        <button onclick="toggleLessonComplete('lesson3')" id="btnComplete-lesson3" class="w-full sm:w-auto px-4 py-2.5 sm:py-2 rounded-xl text-xs font-bold border transition-colors flex items-center justify-center gap-2 border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">
+                            <i class="fa-regular fa-circleCheck text-base"></i>
+                            <span>Marcar Concluída</span>
+                        </button>
+                    </div>
+
+                    <div class="glass-panel rounded-2xl p-4 sm:p-8 shadow-sm space-y-6">
+                        <div class="prose dark:prose-invert max-w-none space-y-4 text-slate-700 dark:text-slate-300 leading-relaxed">
+                            <p>
+                                Toda política pública possui um ciclo de vida natural. Em abril de 2024, o Informatiza APS foi revogado oficialmente através da <strong>Portaria GM/MS nº 3.493</strong>.
+                            </p>
+
+                            <div class="p-4 bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 my-4 flex items-start gap-3">
+                                <i class="fa-solid fa-circle-question text-brand-600 text-2xl mt-1"></i>
+                                <div>
+                                    <h4 class="font-bold text-slate-900 dark:text-white text-base">Como analistas de políticas públicas, precisamos perguntar:</h4>
+                                    <p class="text-sm font-semibold text-rose-600 dark:text-rose-400 mt-1">
+                                        Ele foi revogado porque fracassou? A resposta é NÃO.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <p>
+                                A revogação ocorreu por uma mudança estratégica na metodologia de como o Governo Federal financia a Atenção Primária. O programa cumpriu seu papel de dar o "empurrão inicial". O <strong>Tribunal de Contas da União (TCU)</strong> inclusive atestou que municípios informatizados tiveram melhores indicadores de saúde.
+                            </p>
+
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white pt-2 flex items-center gap-2">
+                                <i class="fa-solid fa-monument text-brand-600"></i>
+                                Qual é o Legado Deixado?
+                            </h3>
+
+                            <p>
+                                As pautas do Informatiza APS (como infraestrutura, dados e interoperabilidade) foram absorvidas pelo atual <strong>Programa SUS Digital</strong>.
+                            </p>
+
+                            <div class="bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 p-5 rounded-2xl space-y-2">
+                                <div class="flex items-center gap-2 font-bold text-emerald-800 dark:text-emerald-300 text-sm">
+                                    <i class="fa-solid fa-mobile-screen-button text-lg"></i>
+                                    A Aplicação Prática no seu Celular:
+                                </div>
+                                <p class="text-sm text-emerald-900 dark:text-emerald-200 leading-relaxed">
+                                    Hoje, quando você acessa o aplicativo <strong>"Meu SUS Digital"</strong> no seu smartphone e visualiza suas vacinas e histórico de consultas, você está presenciando o resultado direto de uma base de dados estruturada a partir dos incentivos do Informatiza APS!
+                                </p>
+                            </div>
+
+                            <div class="p-4 bg-blue-50 dark:bg-slate-800 rounded-xl border-l-4 border-brand-600">
+                                <h4 class="font-bold text-brand-800 dark:text-blue-300 text-sm">A Grande Lição:</h4>
+                                <p class="text-sm text-slate-700 dark:text-slate-300 mt-1">
+                                    O mecanismo de financiamento pode mudar, mas a transformação digital na saúde tornou-se um <strong>caminho sem volta</strong>.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Video Resources & Link to Meu SUS Digital for Lesson 3 -->
+                        <div class="p-5 rounded-2xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-4 my-6">
+                            <h4 class="font-bold text-slate-900 dark:text-white text-sm uppercase tracking-wider flex items-center gap-2">
+                                <i class="fa-solid fa-circle-play text-rose-500 text-lg"></i>
+                                Vídeos e Portais da Nova Era Digital:
+                            </h4>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <!-- Video 1 -->
+                                <a href="https://www.youtube.com/watch?v=A5F17VY-OCQ" target="_blank" rel="noopener noreferrer" class="p-3 bg-white dark:bg-slate-700/60 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-purple-500 transition-all flex items-start gap-3 group shadow-sm">
+                                    <div class="w-10 h-10 rounded-lg bg-purple-100 dark:bg-purple-950 text-purple-600 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                                        <i class="fa-brands fa-youtube text-lg"></i>
+                                    </div>
+                                    <div class="overflow-hidden">
+                                        <h5 class="text-xs font-bold text-slate-900 dark:text-white truncate group-hover:text-purple-600 dark:group-hover:text-purple-400">Vídeo: Programa SUS Digital (CONASEMS)</h5>
+                                        <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Entenda como o novo programa articula telessaúde e dados no país.</p>
+                                        <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-purple-600 dark:text-purple-400 mt-1">
+                                            Assistir Episódio <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                        </span>
+                                    </div>
+                                </a>
+
+                                <!-- Video 2 -->
+                                <a href="https://www.youtube.com/watch?v=x2uO8Wpo4p0" target="_blank" rel="noopener noreferrer" class="p-3 bg-white dark:bg-slate-700/60 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-brand-500 transition-all flex items-start gap-3 group shadow-sm">
+                                    <div class="w-10 h-10 rounded-lg bg-rose-100 dark:bg-rose-950 text-rose-600 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                                        <i class="fa-brands fa-youtube text-lg"></i>
+                                    </div>
+                                    <div class="overflow-hidden">
+                                        <h5 class="text-xs font-bold text-slate-900 dark:text-white truncate group-hover:text-brand-600 dark:group-hover:text-blue-400">Vídeo: Conheça o SUS Digital</h5>
+                                        <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Minuto Saúde Digital resumindo as inovações tecnológicas no SUS.</p>
+                                        <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-brand-600 dark:text-blue-400 mt-1">
+                                            Assistir no YouTube <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                        </span>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <!-- Direct Links Grid -->
+                            <div class="flex flex-wrap items-center gap-3 pt-2">
+                                <a href="https://meususdigital.saude.gov.br/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl transition-all shadow-sm">
+                                    <i class="fa-solid fa-mobile-screen"></i>
+                                    <span>Acessar o WebApp Meu SUS Digital</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </a>
+                                <a href="https://aps.saude.gov.br/ape/esus" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-100 text-xs font-bold rounded-xl transition-all">
+                                    <i class="fa-solid fa-database"></i>
+                                    <span>Portal e-SUS APS (Histórico & Documentação)</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Navigation Footer -->
+                        <div class="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 pt-6 border-t border-slate-200 dark:border-slate-700">
+                            <button onclick="navigateTo('lesson2')" class="px-4 py-2.5 sm:py-2 text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 font-medium text-center">
+                                <i class="fa-solid fa-arrow-left mr-1"></i> Anterior
+                            </button>
+                            <button onclick="navigateTo('quiz')" class="bg-amber-500 hover:bg-amber-600 text-white px-5 py-3 sm:py-2.5 rounded-xl font-bold text-sm shadow transition-all flex items-center justify-center gap-2 active:scale-95">
+                                Ir para o Quiz de Conhecimento <i class="fa-solid fa-list-check"></i>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VIEW 4: QUIZ DE CONHECIMENTO -->
+                <section id="view-quiz" class="view-section hidden space-y-6">
+                    <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-4">
+                        <div>
+                            <span class="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider">Avaliação Final</span>
+                            <h2 class="text-xl sm:text-2xl font-bold font-serif text-slate-900 dark:text-white">Quiz de Conhecimento</h2>
+                        </div>
+                        <div class="text-sm font-bold text-slate-600 dark:text-slate-300">
+                            Nota: <span id="quizScoreDisplay">0/6</span>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel rounded-2xl p-4 sm:p-8 shadow-sm space-y-6 sm:space-y-8">
+                        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+                            Responda às 6 questões abaixo para testar seus conhecimentos sobre o Informatiza APS e a Cultura Digital na saúde pública.
+                        </p>
+
+                        <div id="quizQuestionsContainer" class="space-y-6 sm:space-y-8">
+                            <!-- Question 1 -->
+                            <div class="space-y-3 p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/60" id="qContainer-0">
+                                <h4 class="font-bold text-sm sm:text-base text-slate-900 dark:text-white leading-snug">
+                                    1. Qual foi a principal estratégia utilizada pelo Ministério da Saúde no programa Informatiza APS para garantir que os municípios adotassem o Prontuário Eletrônico?
+                                </h4>
+                                <div class="space-y-2 text-xs sm:text-sm">
+                                    <label class="quiz-option flex items-start sm:items-center gap-3 p-3.5 sm:p-3 rounded-xl sm:rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors active:bg-slate-100 dark:active:bg-slate-700 select-none">
+                                        <input type="radio" name="q0" value="a" class="mt-0.5 sm:mt-0 text-brand-600 focus:ring-brand-500 shrink-0">
+                                        <span>a) Ameaçar com a demissão dos servidores públicos que recusassem a tecnologia.</span>
+                                    </label>
+                                    <label class="quiz-option flex items-start sm:items-center gap-3 p-3.5 sm:p-3 rounded-xl sm:rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors active:bg-slate-100 dark:active:bg-slate-700 select-none">
+                                        <input type="radio" name="q0" value="b" class="mt-0.5 sm:mt-0 text-brand-600 focus:ring-brand-500 shrink-0">
+                                        <span>b) Apenas distribuir computadores e tablets sem exigir contrapartida.</span>
+                                    </label>
+                                    <label class="quiz-option flex items-start sm:items-center gap-3 p-3.5 sm:p-3 rounded-xl sm:rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors active:bg-slate-100 dark:active:bg-slate-700 select-none">
+                                        <input type="radio" name="q0" value="c" class="mt-0.5 sm:mt-0 text-brand-600 focus:ring-brand-500 shrink-0">
+                                        <span>c) Vincular o repasse de incentivos financeiros à comprovação do envio contínuo de dados digitais.</span>
+                                    </label>
+                                    <label class="quiz-option flex items-start sm:items-center gap-3 p-3.5 sm:p-3 rounded-xl sm:rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors active:bg-slate-100 dark:active:bg-slate-700 select-none">
+                                        <input type="radio" name="q0" value="d" class="mt-0.5 sm:mt-0 text-brand-600 focus:ring-brand-500 shrink-0">
+                                        <span>d) Obrigar o cidadão a comprar seu próprio prontuário em papel.</span>
+                                    </label>
+                                </div>
+                                <div id="feedback-0" class="hidden p-3 rounded-lg text-xs font-medium leading-relaxed"></div>
+                            </div>
+
+                            <!-- Question 2 -->
+                            <div class="space-y-3 p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/60" id="qContainer-1">
+                                <h4 class="font-bold text-sm sm:text-base text-slate-900 dark:text-white leading-snug">
+                                    2. De acordo com os desafios reais da Administração Pública apontados no material, qual das opções abaixo NÃO é um obstáculo para a cultura digital na saúde?
+                                </h4>
+                                <div class="space-y-2 text-xs sm:text-sm">
+                                    <label class="quiz-option flex items-start sm:items-center gap-3 p-3.5 sm:p-3 rounded-xl sm:rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors active:bg-slate-100 dark:active:bg-slate-700 select-none">
+                                        <input type="radio" name="q1" value="a" class="mt-0.5 sm:mt-0 text-brand-600 focus:ring-brand-500 shrink-0">
+                                        <span>a) Falta de letramento digital dos profissionais de saúde.</span>
+                                    </label>
+                                    <label class="quiz-option flex items-start sm:items-center gap-3 p-3.5 sm:p-3 rounded-xl sm:rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors active:bg-slate-100 dark:active:bg-slate-700 select-none">
+                                        <input type="radio" name="q1" value="b" class="mt-0.5 sm:mt-0 text-brand-600 focus:ring-brand-500 shrink-0">
+                                        <span>b) O excesso de interesse e a facilidade de adaptação natural de todos os servidores às novas tecnologias.</span>
+                                    </label>
+                                    <label class="quiz-option flex items-start sm:items-center gap-3 p-3.5 sm:p-3 rounded-xl sm:rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors active:bg-slate-100 dark:active:bg-slate-700 select-none">
+                                        <input type="radio" name="q1" value="c" class="mt-0.5 sm:mt-0 text-brand-600 focus:ring-brand-500 shrink-0">
+                                        <span>c) A infraestrutura precária e falta de conectividade (internet) nas unidades básicas.</span>
+                                    </label>
+                                    <label class="quiz-option flex items-start sm:items-center gap-3 p-3.5 sm:p-3 rounded-xl sm:rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors active:bg-slate-100 dark:active:bg-slate-700 select-none">
+                                        <input type="radio" name="q1" value="d" class="mt-0.5 sm:mt-0 text-brand-600 focus:ring-brand-500 shrink-0">
+                                        <span>d) A necessidade de garantir a segurança de dados sensíveis exigida pela LGPD.</span>
+                                    </label>
+                                </div>
+                                <div id="feedback-1" class="hidden p-3 rounded-lg text-xs font-medium leading-relaxed"></div>
+                            </div>
+
+                            <!-- Question 3 -->
+                            <div class="space-y-3 p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/60" id="qContainer-2">
+                                <h4 class="font-bold text-sm sm:text-base text-slate-900 dark:text-white leading-snug">
+                                    3. Sobre a revogação do Informatiza APS em 2024, é correto afirmar como futuro gestor público que:
+                                </h4>
+                                <div class="space-y-2 text-xs sm:text-sm">
+                                    <label class="quiz-option flex items-start sm:items-center gap-3 p-3.5 sm:p-3 rounded-xl sm:rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors active:bg-slate-100 dark:active:bg-slate-700 select-none">
+                                        <input type="radio" name="q2" value="a" class="mt-0.5 sm:mt-0 text-brand-600 focus:ring-brand-500 shrink-0">
+                                        <span>a) O programa foi substituído por uma nova metodologia de cofinanciamento da Atenção Primária, mas seu legado continua no SUS Digital.</span>
+                                    </label>
+                                    <label class="quiz-option flex items-start sm:items-center gap-3 p-3.5 sm:p-3 rounded-xl sm:rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors active:bg-slate-100 dark:active:bg-slate-700 select-none">
+                                        <input type="radio" name="q2" value="b" class="mt-0.5 sm:mt-0 text-brand-600 focus:ring-brand-500 shrink-0">
+                                        <span>b) A revogação ocorreu porque o Tribunal de Contas da União (TCU) comprovou que a tecnologia piorou os indicadores de saúde.</span>
+                                    </label>
+                                    <label class="quiz-option flex items-start sm:items-center gap-3 p-3.5 sm:p-3 rounded-xl sm:rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors active:bg-slate-100 dark:active:bg-slate-700 select-none">
+                                        <input type="radio" name="q2" value="c" class="mt-0.5 sm:mt-0 text-brand-600 focus:ring-brand-500 shrink-0">
+                                        <span>c) O programa acabou porque a sociedade brasileira rejeitou o uso de prontuários eletrônicos.</span>
+                                    </label>
+                                    <label class="quiz-option flex items-start sm:items-center gap-3 p-3.5 sm:p-3 rounded-xl sm:rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors active:bg-slate-100 dark:active:bg-slate-700 select-none">
+                                        <input type="radio" name="q2" value="d" class="mt-0.5 sm:mt-0 text-brand-600 focus:ring-brand-500 shrink-0">
+                                        <span>d) Significa que o Ministério da Saúde abandonou a transformação digital e voltou a exigir o uso exclusivo do papel.</span>
+                                    </label>
+                                </div>
+                                <div id="feedback-2" class="hidden p-3 rounded-lg text-xs font-medium leading-relaxed"></div>
+                            </div>
+
+                            <!-- Question 4 -->
+                            <div class="space-y-3 p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/60" id="qContainer-3">
+                                <h4 class="font-bold text-sm sm:text-base text-slate-900 dark:text-white leading-snug">
+                                    4. Qual era o principal problema do "Caos do Papel" que o Informatiza APS buscou resolver nas Unidades Básicas de Saúde?
+                                </h4>
+                                <div class="space-y-2 text-xs sm:text-sm">
+                                    <label class="quiz-option flex items-start sm:items-center gap-3 p-3.5 sm:p-3 rounded-xl sm:rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors active:bg-slate-100 dark:active:bg-slate-700 select-none">
+                                        <input type="radio" name="q3" value="a" class="mt-0.5 sm:mt-0 text-brand-600 focus:ring-brand-500 shrink-0">
+                                        <span>a) A lentidão natural dos computadores antigos das UBS.</span>
+                                    </label>
+                                    <label class="quiz-option flex items-start sm:items-center gap-3 p-3.5 sm:p-3 rounded-xl sm:rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors active:bg-slate-100 dark:active:bg-slate-700 select-none">
+                                        <input type="radio" name="q3" value="b" class="mt-0.5 sm:mt-0 text-brand-600 focus:ring-brand-500 shrink-0">
+                                        <span>b) A dificuldade exclusiva de ler a letra do médico nas receitas.</span>
+                                    </label>
+                                    <label class="quiz-option flex items-start sm:items-center gap-3 p-3.5 sm:p-3 rounded-xl sm:rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors active:bg-slate-100 dark:active:bg-slate-700 select-none">
+                                        <input type="radio" name="q3" value="c" class="mt-0.5 sm:mt-0 text-brand-600 focus:ring-brand-500 shrink-0">
+                                        <span>c) A fragmentação e perda do histórico do paciente, o que prejudicava o planejamento e a continuidade do cuidado.</span>
+                                    </label>
+                                    <label class="quiz-option flex items-start sm:items-center gap-3 p-3.5 sm:p-3 rounded-xl sm:rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors active:bg-slate-100 dark:active:bg-slate-700 select-none">
+                                        <input type="radio" name="q3" value="d" class="mt-0.5 sm:mt-0 text-brand-600 focus:ring-brand-500 shrink-0">
+                                        <span>d) A falta de médicos especialistas nas áreas rurais e isoladas.</span>
+                                    </label>
+                                </div>
+                                <div id="feedback-3" class="hidden p-3 rounded-lg text-xs font-medium leading-relaxed"></div>
+                            </div>
+
+                            <!-- Question 5 -->
+                            <div class="space-y-3 p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/60" id="qContainer-4">
+                                <h4 class="font-bold text-sm sm:text-base text-slate-900 dark:text-white leading-snug">
+                                    5. Por que o fator humano (capacitação) foi considerado uma barreira tão grande quanto a falta de infraestrutura na implementação da Cultura Digital?
+                                </h4>
+                                <div class="space-y-2 text-xs sm:text-sm">
+                                    <label class="quiz-option flex items-start sm:items-center gap-3 p-3.5 sm:p-3 rounded-xl sm:rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors active:bg-slate-100 dark:active:bg-slate-700 select-none">
+                                        <input type="radio" name="q4" value="a" class="mt-0.5 sm:mt-0 text-brand-600 focus:ring-brand-500 shrink-0">
+                                        <span>a) Porque os profissionais de saúde se recusavam a usar a internet disponibilizada pelo SUS.</span>
+                                    </label>
+                                    <label class="quiz-option flex items-start sm:items-center gap-3 p-3.5 sm:p-3 rounded-xl sm:rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors active:bg-slate-100 dark:active:bg-slate-700 select-none">
+                                        <input type="radio" name="q4" value="b" class="mt-0.5 sm:mt-0 text-brand-600 focus:ring-brand-500 shrink-0">
+                                        <span>b) Porque mudar do papel para a tela exige letramento digital e altera a rotina de trabalho, causando medo e resistência inicial.</span>
+                                    </label>
+                                    <label class="quiz-option flex items-start sm:items-center gap-3 p-3.5 sm:p-3 rounded-xl sm:rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors active:bg-slate-100 dark:active:bg-slate-700 select-none">
+                                        <input type="radio" name="q4" value="c" class="mt-0.5 sm:mt-0 text-brand-600 focus:ring-brand-500 shrink-0">
+                                        <span>c) Porque o Tribunal de Contas da União proibiu expressamente o treinamento dos servidores.</span>
+                                    </label>
+                                    <label class="quiz-option flex items-start sm:items-center gap-3 p-3.5 sm:p-3 rounded-xl sm:rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors active:bg-slate-100 dark:active:bg-slate-700 select-none">
+                                        <input type="radio" name="q4" value="d" class="mt-0.5 sm:mt-0 text-brand-600 focus:ring-brand-500 shrink-0">
+                                        <span>d) Porque não existem cursos de capacitação técnica para servidores públicos no Brasil.</span>
+                                    </label>
+                                </div>
+                                <div id="feedback-4" class="hidden p-3 rounded-lg text-xs font-medium leading-relaxed"></div>
+                            </div>
+
+                            <!-- Question 6 -->
+                            <div class="space-y-3 p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/60" id="qContainer-5">
+                                <h4 class="font-bold text-sm sm:text-base text-slate-900 dark:text-white leading-snug">
+                                    6. Como o aplicativo "Meu SUS Digital" se conecta com a evolução da Cultura Digital discutida neste módulo?
+                                </h4>
+                                <div class="space-y-2 text-xs sm:text-sm">
+                                    <label class="quiz-option flex items-start sm:items-center gap-3 p-3.5 sm:p-3 rounded-xl sm:rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors active:bg-slate-100 dark:active:bg-slate-700 select-none">
+                                        <input type="radio" name="q5" value="a" class="mt-0.5 sm:mt-0 text-brand-600 focus:ring-brand-500 shrink-0">
+                                        <span>a) Ele substituiu os médicos nas UBS, realizando consultas e diagnósticos automaticamente por Inteligência Artificial.</span>
+                                    </label>
+                                    <label class="quiz-option flex items-start sm:items-center gap-3 p-3.5 sm:p-3 rounded-xl sm:rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors active:bg-slate-100 dark:active:bg-slate-700 select-none">
+                                        <input type="radio" name="q5" value="b" class="mt-0.5 sm:mt-0 text-brand-600 focus:ring-brand-500 shrink-0">
+                                        <span>b) É o resultado prático de uma base de dados nacional estruturada (RNDS), devolvendo ao próprio cidadão o acesso ao seu histórico de vacinas e exames.</span>
+                                    </label>
+                                    <label class="quiz-option flex items-start sm:items-center gap-3 p-3.5 sm:p-3 rounded-xl sm:rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors active:bg-slate-100 dark:active:bg-slate-700 select-none">
+                                        <input type="radio" name="q5" value="c" class="mt-0.5 sm:mt-0 text-brand-600 focus:ring-brand-500 shrink-0">
+                                        <span>c) Ele serve exclusivamente para o paciente agendar consultas presenciais em hospitais particulares.</span>
+                                    </label>
+                                    <label class="quiz-option flex items-start sm:items-center gap-3 p-3.5 sm:p-3 rounded-xl sm:rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors active:bg-slate-100 dark:active:bg-slate-700 select-none">
+                                        <input type="radio" name="q5" value="d" class="mt-0.5 sm:mt-0 text-brand-600 focus:ring-brand-500 shrink-0">
+                                        <span>d) É um jogo educativo desenvolvido para ensinar crianças sobre saúde bucal e alimentação saudável.</span>
+                                    </label>
+                                </div>
+                                <div id="feedback-5" class="hidden p-3 rounded-lg text-xs font-medium leading-relaxed"></div>
+                            </div>
+                        </div>
+
+                        <!-- Quiz Controls -->
+                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-4 border-t border-slate-200 dark:border-slate-700">
+                            <button onclick="resetQuiz()" class="px-4 py-2 text-xs font-bold text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white text-center">
+                                <i class="fa-solid fa-rotate-left mr-1"></i> Refazer Quiz
+                            </button>
+                            <button onclick="submitQuiz()" class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-3 sm:py-2.5 rounded-xl font-bold text-sm shadow transition-all flex items-center justify-center gap-2 active:scale-95">
+                                <i class="fa-solid fa-check"></i> Avaliar Respostas
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VIEW 5: ASSISTENTE VIRTUAL (DASHBOARD) -->
+                <section id="view-aiTutor" class="view-section hidden space-y-6">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 dark:border-slate-700 pb-4">
+                        <div>
+                            <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">Tira-Dúvidas Local</span>
+                            <h2 class="text-xl sm:text-2xl font-bold font-serif text-slate-900 dark:text-white">Assistente Virtual</h2>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="clearAIChat()" class="px-3 py-1.5 text-xs font-bold bg-slate-200 dark:bg-slate-700 text-slate-600 hover:text-rose-600 dark:text-slate-300 dark:hover:text-rose-400 rounded-lg transition-colors" title="Limpar Histórico de Chat">
+                                <i class="fa-solid fa-trash-can mr-1"></i> Limpar Chat
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Layout Duas Colunas: FAQs & Chat -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+                        
+                        <!-- Coluna 1: 20 Perguntas Frequentes -->
+                        <div class="lg:col-span-1 glass-panel rounded-2xl p-4 flex flex-col h-[65vh] max-h-[580px] shadow-sm">
+                            <h3 class="text-sm font-bold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+                                <i class="fa-solid fa-bolt text-amber-500"></i>
+                                Perguntas Frequentes
+                            </h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-3 border-b border-slate-200 dark:border-slate-700 pb-2">
+                                Selecione qualquer dúvida abaixo:
+                            </p>
+                            
+                            <div id="faqButtonsContainer" class="flex-1 overflow-y-auto custom-scrollbar flex flex-col gap-2 pr-2">
+                                <!-- Botões gerados via Javascript -->
+                            </div>
+                        </div>
+
+                        <!-- Coluna 2 e 3: Chat Window -->
+                        <div class="lg:col-span-2 glass-panel rounded-2xl p-4 sm:p-6 shadow-sm flex flex-col h-[65vh] max-h-[580px]">
+                            <div id="aiChatWindow" class="flex-1 overflow-y-auto custom-scrollbar space-y-4 pr-2">
+                                <!-- Mensagem Inicial da Assistente -->
+                                <div class="flex items-start gap-2.5 sm:gap-3">
+                                    <div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-sm">
+                                        <i class="fa-solid fa-robot"></i>
+                                    </div>
+                                    <div class="p-3.5 sm:p-4 rounded-2xl rounded-tl-none bg-slate-100 dark:bg-slate-800 text-xs sm:text-sm text-slate-800 dark:text-slate-200 max-w-[92%] sm:max-w-[85%] leading-relaxed shadow-sm space-y-2 ai-response-content">
+                                        <p class="font-semibold text-emerald-700 dark:text-emerald-400">
+                                            👋 Olá, Cursista! Sou a Assistente Virtual do Curso.
+                                        </p>
+                                        <p>
+                                            Fui programada com o conhecimento integral do nosso módulo de <strong>Cultura Digital na Gestão Pública (UFMT)</strong>. Estou pronta para tirar suas dúvidas e te ajudar a estudar.
+                                        </p>
+                                        <p>
+                                            Basta clicar em qualquer uma das perguntas no menu ao lado para começarmos!
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Mobile Bottom Navigation (Visible only on Mobile) -->
+    <nav id="mobileBottomNav" class="sm:hidden fixed bottom-0 w-full bg-white/95 dark:bg-slate-800/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-700 z-40 flex justify-around items-center h-16 px-2 shadow-[0_-4px_10px_-1px_rgba(0,0,0,0.1)] transition-transform duration-300">
+        <button onclick="navigateTo('intro')" id="mobnav-intro" class="mob-nav-btn flex flex-col items-center justify-center w-full h-full space-y-1 text-brand-600 dark:text-blue-400 font-bold transition-colors">
+            <i class="fa-solid fa-house text-[18px]"></i>
+            <span class="text-[10px]">Início</span>
+        </button>
+        <button onclick="navigateTo('lesson1')" id="mobnav-lesson" class="mob-nav-btn flex flex-col items-center justify-center w-full h-full space-y-1 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white font-semibold transition-colors">
+            <i class="fa-solid fa-book-open text-[18px]"></i>
+            <span class="text-[10px]">Lições</span>
+        </button>
+        <button onclick="navigateTo('quiz')" id="mobnav-quiz" class="mob-nav-btn flex flex-col items-center justify-center w-full h-full space-y-1 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white font-semibold transition-colors">
+            <i class="fa-solid fa-list-check text-[18px]"></i>
+            <span class="text-[10px]">Quiz</span>
+        </button>
+        <button onclick="navigateTo('aiTutor')" id="mobnav-aiTutor" class="mob-nav-btn flex flex-col items-center justify-center w-full h-full space-y-1 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white font-semibold transition-colors">
+            <i class="fa-solid fa-robot text-[18px]"></i>
+            <span class="text-[10px]">Assistente</span>
+        </button>
+    </nav>
+
+    <!-- Application JavaScript Logic -->
+    <script>
+        // App State
+        const state = {
+            studentName: localStorage.getItem('ufmt_student_name') || 'Cursista de Administração',
+            soundEnabled: true,
+            theme: localStorage.getItem('ufmt_theme') || 'light',
+            completed: JSON.parse(localStorage.getItem('ufmt_completed') || '{"lesson1":false, "lesson2":false, "lesson3":false, "quiz":false}'),
+            quizAnswers: {},
+            quizScore: 0,
+            isAIProcessing: false
+        };
+
+        // Web Audio API Sound Synthesizer
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playSound(type) {
+            if (!state.soundEnabled) return;
+            try {
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                if (type === 'click') {
+                    osc.frequency.setValueAtTime(400, audioCtx.currentTime);
+                    gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.05);
+                } else if (type === 'success') {
+                    osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+                    osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.1); // E5
+                    gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.3);
+                }
+            } catch(e) { console.error(e); }
+        }
+
+        // Theme Toggle Handler
+        function initTheme() {
+            if (state.theme === 'dark') {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        }
+
+        document.getElementById('themeToggleBtn').addEventListener('click', () => {
+            state.theme = state.theme === 'light' ? 'dark' : 'light';
+            localStorage.setItem('ufmt_theme', state.theme);
+            initTheme();
+            playSound('click');
+        });
+
+        // Sound Toggle Handler
+        document.getElementById('soundToggleBtn').addEventListener('click', () => {
+            state.soundEnabled = !state.soundEnabled;
+            const icon = document.getElementById('soundIcon');
+            if (state.soundEnabled) {
+                icon.className = 'fa-solid fa-volume-high text-lg';
+            } else {
+                icon.className = 'fa-solid fa-volume-xmark text-lg text-rose-500';
+            }
+        });
+
+        // Sidebar Toggle for Mobile
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            const bottomNav = document.getElementById('mobileBottomNav');
+
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+
+            if (bottomNav) {
+                if (!sidebar.classList.contains('-translate-x-full')) {
+                    bottomNav.classList.add('translate-y-full'); // Esconde a barra inferior
+                } else {
+                    bottomNav.classList.remove('translate-y-full'); // Mostra a barra inferior
+                }
+            }
+        }
+        document.getElementById('toggleSidebarBtn').addEventListener('click', toggleSidebar);
+
+        // View Navigation System
+        function navigateTo(viewId) {
+            playSound('click');
+            document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
+            const target = document.getElementById(`view-${viewId}`);
+            if (target) target.classList.remove('hidden');
+
+            // Update Nav Active States
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-brand-50', 'text-brand-700', 'dark:bg-slate-700', 'dark:text-blue-400', 'font-semibold');
+                btn.classList.add('text-slate-600', 'dark:text-slate-300');
+            });
+
+            const activeNav = document.getElementById(`nav-${viewId}`);
+            if (activeNav) {
+                activeNav.classList.add('bg-brand-50', 'text-brand-700', 'dark:bg-slate-700', 'dark:text-blue-400', 'font-semibold');
+            }
+
+            // Update Mobile Nav Active States
+            document.querySelectorAll('.mob-nav-btn').forEach(btn => {
+                btn.classList.remove('text-brand-600', 'dark:text-blue-400', 'font-bold');
+                btn.classList.add('text-slate-500', 'dark:text-slate-400', 'font-semibold');
+            });
+
+            let mobTarget = viewId;
+            if (viewId.startsWith('lesson')) mobTarget = 'lesson';
+
+            const activeMobNav = document.getElementById(`mobnav-${mobTarget}`);
+            if (activeMobNav) {
+                activeMobNav.classList.remove('text-slate-500', 'dark:text-slate-400', 'font-semibold');
+                activeMobNav.classList.add('text-brand-600', 'dark:text-blue-400', 'font-bold');
+            }
+
+            // Close mobile drawer if open
+            const sidebar = document.getElementById('sidebar');
+            if (!sidebar.classList.contains('-translate-x-full') && window.innerWidth < 1024) {
+                toggleSidebar();
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Completion Management
+        function toggleLessonComplete(key) {
+            state.completed[key] = !state.completed[key];
+            localStorage.setItem('ufmt_completed', JSON.stringify(state.completed));
+            playSound(state.completed[key] ? 'success' : 'click');
+            updateProgressUI();
+        }
+
+        function updateProgressUI() {
+            const keys = ['lesson1', 'lesson2', 'lesson3', 'quiz'];
+            const completedCount = keys.filter(k => state.completed[k]).length;
+            const percentage = Math.round((completedCount / keys.length) * 100);
+
+            // Header Progress
+            document.getElementById('headerProgressTxt').textContent = `${percentage}%`;
+            document.getElementById('headerProgressBar').style.width = `${percentage}%`;
+
+            // Mobile Horizontal Top-Right Progress Indicator
+            const mobileTxt = document.getElementById('mobileSideProgressTxt');
+            const mobileBar = document.getElementById('mobileSideProgressBar');
+            if (mobileTxt) mobileTxt.textContent = `${percentage}%`;
+            if (mobileBar) mobileBar.style.width = `${percentage}%`;
+
+            // Sidebar Check Icons
+            keys.forEach(k => {
+                const checkIcon = document.getElementById(`check-${k}`);
+                if (checkIcon) {
+                    checkIcon.classList.toggle('hidden', !state.completed[k]);
+                }
+
+                const btn = document.getElementById(`btnComplete-${k}`);
+                if (btn) {
+                    if (state.completed[k]) {
+                        btn.className = 'px-4 py-2 rounded-xl text-xs font-bold border transition-colors flex items-center gap-2 bg-emerald-500 text-white border-emerald-600';
+                        btn.innerHTML = `<i class="fa-solid fa-circle-check text-base"></i> <span>Concluída</span>`;
+                    } else {
+                        btn.className = 'px-4 py-2 rounded-xl text-xs font-bold border transition-colors flex items-center gap-2 border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700';
+                        btn.innerHTML = `<i class="fa-regular fa-circleCheck text-base"></i> <span>Marcar Concluída</span>`;
+                    }
+                }
+            });
+        }
+
+        // Student Name Handler
+        const studentInput = document.getElementById('studentNameInput');
+        studentInput.addEventListener('change', (e) => {
+            state.studentName = e.target.value.trim() || 'Cursista de Administração';
+            localStorage.setItem('ufmt_student_name', state.studentName);
+        });
+
+        // Novo Sistema Inteligente de Quiz (6 Questões com Feedback Dinâmico)
+        const quizData = [
+            {
+                correct: 'c',
+                msgSuccess: 'O programa vinculou inteligentemente o repasse financeiro (dinheiro) à comprovação do envio contínuo de dados digitais pelo Prontuário Eletrônico (PEC).',
+                msgError: 'A principal estratégia não foi punir os servidores (a) nem distribuir equipamentos sem regras (b), mas sim a **Indução Financeira**: condicionar as verbas do Governo ao uso prático do sistema digital (opção C).'
+            },
+            {
+                correct: 'b',
+                msgSuccess: 'Exato! O excesso de interesse NÃO é a realidade. O maior desafio humano na Administração Pública é justamente a resistência à mudança e a necessidade contínua de letramento digital.',
+                msgError: 'A pergunta pede o que NÃO é um obstáculo. A opção "b" é a resposta correta por ser a única afirmação falsa: na realidade, não houve "facilidade natural" e sim enorme dificuldade e resistência inicial dos servidores.'
+            },
+            {
+                correct: 'a',
+                msgSuccess: 'Perfeito! A revogação em 2024 apenas representou a transição do método de financiamento, abrindo espaço definitivo para a ampliação da pauta sob o Programa SUS Digital.',
+                msgError: 'A opção correta é a "a". O Informatiza APS não fracassou, o TCU atestou suas melhorias (b), e o uso do papel não voltou (d). Ele apenas cumpriu seu ciclo e seu legado foi incorporado no SUS Digital.'
+            },
+            {
+                correct: 'c',
+                msgSuccess: 'Correto! A fragmentação do histórico em fichas de papel rasgadas ou perdidas impedia o planejamento do gestor e prejudicava o acompanhamento adequado do cidadão nas consultas.',
+                msgError: 'A opção correta é a "c". O maior problema não era a lentidão de computadores (já que eles nem existiam ou não eram usados na sala clínica), e sim a perda do histórico do paciente que ficava nas velhas pastas de papel.'
+            },
+            {
+                correct: 'b',
+                msgSuccess: 'Muito bem! A mudança do papel para a tela exigiu letramento digital e alterou drasticamente a rotina, gerando medo e resistência natural na linha de frente.',
+                msgError: 'A opção correta é a "b". O fator humano é uma grande barreira porque muitos profissionais mais antigos não possuíam intimidade com computadores, o que gerou insegurança e medo de prejudicar ou atrasar o atendimento dos pacientes.'
+            },
+            {
+                correct: 'b',
+                msgSuccess: 'É isso mesmo! O Meu SUS Digital reflete os dados que são coletados na ponta e enviados à base estruturada (RNDS), devolvendo finalmente o acesso aos dados para as mãos do cidadão.',
+                msgError: 'A opção correta é a "b". O aplicativo é o "ponto de chegada" onde o paciente enxerga os resultados da digitalização (suas vacinas e exames médicos), algo que só é possível graças à conexão com a Rede Nacional de Dados em Saúde (RNDS).'
+            }
+        ];
+
+        function submitQuiz() {
+            let score = 0;
+            const totalQuestions = quizData.length;
+
+            for (let i = 0; i < totalQuestions; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                const feedbackBox = document.getElementById(`feedback-${i}`);
+                
+                // Reset de classes
+                feedbackBox.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800', 'bg-rose-100', 'text-rose-800', 'dark:bg-emerald-900/50', 'dark:text-emerald-200', 'dark:bg-rose-900/50', 'dark:text-rose-200');
+
+                if (selected) {
+                    if (selected.value === quizData[i].correct) {
+                        score++;
+                        feedbackBox.classList.add('bg-emerald-100', 'dark:bg-emerald-900/50', 'text-emerald-800', 'dark:text-emerald-200');
+                        feedbackBox.innerHTML = `
+                            <div class="flex items-start gap-2">
+                                <i class="fa-solid fa-circle-check text-base mt-0.5"></i>
+                                <div>
+                                    <strong class="block mb-1">Correto! Você acertou.</strong>
+                                    <span>${quizData[i].msgSuccess}</span>
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        feedbackBox.classList.add('bg-rose-100', 'dark:bg-rose-900/50', 'text-rose-800', 'dark:text-rose-200');
+                        feedbackBox.innerHTML = `
+                            <div class="flex items-start gap-2">
+                                <i class="fa-solid fa-circle-xmark text-base mt-0.5"></i>
+                                <div>
+                                    <strong class="block mb-1">Resposta Incorreta.</strong>
+                                    <span>${quizData[i].msgError}</span>
+                                </div>
+                            </div>
+                        `;
+                    }
+                } else {
+                    feedbackBox.classList.add('bg-rose-100', 'dark:bg-rose-900/50', 'text-rose-800', 'dark:text-rose-200');
+                    feedbackBox.innerHTML = `<i class="fa-solid fa-triangle-exclamation mr-1"></i> Você não respondeu esta pergunta.`;
+                }
+            }
+
+            state.quizScore = score;
+            document.getElementById('quizScoreDisplay').textContent = `${score}/${totalQuestions}`;
+
+            // Precisa acertar no mínimo 4/6 para concluir
+            if (score >= 4) {
+                state.completed.quiz = true;
+                localStorage.setItem('ufmt_completed', JSON.stringify(state.completed));
+                playSound('success');
+            } else {
+                playSound('click');
+            }
+            updateProgressUI();
+        }
+
+        function resetQuiz() {
+            const totalQuestions = quizData.length;
+            document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+            for (let i = 0; i < totalQuestions; i++) {
+                document.getElementById(`feedback-${i}`).classList.add('hidden');
+            }
+            document.getElementById('quizScoreDisplay').textContent = `0/${totalQuestions}`;
+        }
+
+        // Formatter helper for AI markdown & rich HTML responses
+        function formatMarkdownToHTML(str) {
+            if (!str) return '';
+            return str
+                .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-slate-900 dark:text-white">$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em class="italic">$1</em>')
+                .replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 bg-slate-200 dark:bg-slate-700/80 rounded font-mono text-xs text-brand-700 dark:text-blue-300">$1</code>')
+                .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-brand-600 dark:text-blue-400 font-semibold underline hover:text-brand-800 transition-colors">$1 <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>')
+                .replace(/^• (.*$)/gim, '<li class="flex items-start gap-2 my-1"><span class="text-emerald-500 font-bold">•</span><span>$1</span></li>')
+                .replace(/^(\d+)\. (.*$)/gim, '<li class="flex items-start gap-2 my-1"><span class="font-bold text-brand-600 dark:text-blue-400">$1.</span><span>$2</span></li>')
+                .replace(/\n\n/g, '<br><br>')
+                .replace(/\n/g, '<br>');
+        }
+
+        // --- BASE DE CONHECIMENTO (20 PERGUNTAS FAQ) ---
+        const faqDatabase = [
+            { id: 'q1', icon: '🛑', title: 'Por que o Informatiza APS foi revogado em 2024?', answer: `**A Revogação do Informatiza APS (Portaria GM/MS nº 3.493/2024)**\n\nA revogação não aconteceu porque o programa fracassou. Pelo contrário! Ele cumpriu com excelência seu papel estruturante de dar o "empurrão inicial" para que os municípios adotassem os prontuários eletrônicos.\n\nO motivo da revogação foi uma **mudança estratégica no modelo de financiamento** da Atenção Primária pelo Governo Federal. As metas de tecnologia, conectividade e envio de dados não deixaram de existir; elas evoluíram e foram totalmente absorvidas pelo atual **Programa SUS Digital**.` },
+            { id: 'q2', icon: '💻', title: 'O que é o Prontuário Eletrônico (PEC)?', answer: `**Prontuário Eletrônico do Cidadão (PEC)**\n\nÉ um software gratuito disponibilizado pelo Ministério da Saúde (dentro da estratégia e-SUS APS) para que médicos, enfermeiros e dentistas registrem todo o atendimento clínico de forma 100% digital.\n\nEle centraliza o histórico do paciente, facilitando a visualização de consultas anteriores, prescrições de medicamentos e exames, tudo em tempo real e de forma segura.` },
+            { id: 'q3', icon: '📝', title: 'O que é a Coleta de Dados Simplificada (CDS)?', answer: `**Coleta de Dados Simplificada (CDS)**\n\nÉ o uso de formulários de papel padronizados, adotado principalmente em postos de saúde ou equipes rurais onde ainda não há computador ou energia elétrica na sala de atendimento. Posteriormente, um digitador passa essas fichas para o sistema federal. É considerada uma estratégia de transição.` },
+            { id: 'q4', icon: '⚖️', title: 'Qual a diferença entre PEC e CDS?', answer: `**Diferença Prática:**\n\n- **PEC:** O atendimento é feito **diretamente no computador** na frente do paciente. O médico vê o histórico na hora, imprime a receita pelo sistema e o dado sobe automaticamente para o Governo.\n- **CDS:** O profissional anota tudo em **papel**. Outra pessoa precisa digitar tudo depois. O médico não consegue ver os exames antigos do paciente na hora da consulta e o processo gera muito retrabalho.` },
+            { id: 'q5', icon: '🏛️', title: 'O que foi o programa Informatiza APS?', answer: `**O Programa Informatiza APS**\n\nLançado no fim de 2019, foi uma grande política pública criada para impulsionar a informatização das Unidades Básicas de Saúde (UBS). O Governo Federal pagava um incentivo financeiro mensal (dinheiro extra) para as prefeituras, mas exigia como contrapartida a comprovação do uso contínuo de prontuários eletrônicos.` },
+            { id: 'q6', icon: '💰', title: 'Como funcionava a "Regra dos 3 Meses"?', answer: `**A Regra da Suspensão Financeira**\n\nO Governo implementou uma regra rigorosa de gestão: se a prefeitura ficasse **3 meses consecutivos sem enviar dados** validados das consultas via sistema eletrônico para Brasília, o repasse financeiro (dinheiro) era **cortado automaticamente**.\n\nIsso obrigava os prefeitos e gestores a consertarem as redes de internet e forçarem o uso real da tecnologia, e não apenas comprarem computadores para enfeite.` },
+            { id: 'q7', icon: '🔌', title: 'Quais os maiores desafios de infraestrutura nas UBSs?', answer: `**Desafios Estruturais do SUS**\n\nA tecnologia não funciona sozinha. Os principais gargalos nas UBS brasileiras foram:\n- **Falta de Internet:** Ausência de banda larga ou quedas constantes do sinal (especialmente no interior).\n- **Equipamentos Obsoletos:** Computadores velhos que travavam o sistema no meio da consulta médica.\n- **Manutenção:** Falta de técnicos de TI concursados nas Secretarias de Saúde para consertarem as máquinas rapidamente.` },
+            { id: 'q8', icon: '🤷‍♂️', title: 'Por que há resistência dos profissionais ao digital?', answer: `**A Barreira do Fator Humano**\n\nMuitos profissionais (principalmente os mais antigos) viam o computador como uma barreira que tirava o "olho no olho" com o paciente. Além disso, havia uma séria falta de **letramento digital** (dificuldade em digitar rápido, usar mouse), o que gerava medo de atrasar a longa fila de pacientes lá fora.` },
+            { id: 'q9', icon: '📱', title: 'O que é o novo Programa SUS Digital?', answer: `**Programa SUS Digital (2024 em diante)**\n\nÉ a evolução das políticas anteriores. Ele entende que a transformação digital vai além de apenas "ter computador no posto". O SUS Digital engloba a **Telessaúde** (consultas à distância), a integração massiva de dados em nuvem e a oferta de serviços diretamente no celular do cidadão brasileiro.` },
+            { id: 'q10', icon: '📲', title: 'O que é o aplicativo Meu SUS Digital?', answer: `**Meu SUS Digital (Antigo Conecte SUS)**\n\nÉ o aplicativo oficial criado para **o cidadão**. Enquanto o médico usa o "PEC", o paciente usa o "Meu SUS Digital" no celular. Por ele, você pode ver seu certificado de vacinas, resultado de exames de laboratório público, fila de transplantes e os remédios que retirou na farmácia.` },
+            { id: 'q11', icon: '🌐', title: 'O que significa a sigla RNDS?', answer: `**Rede Nacional de Dados em Saúde (RNDS)**\n\nÉ a grande "rodovia de dados" do Governo Federal. Ela interliga as informações dos postos de saúde, hospitais, laboratórios públicos e até hospitais particulares. O objetivo é garantir que o histórico de saúde de um brasileiro esteja disponível para o médico que for atendê-lo, independentemente da cidade em que ele esteja.` },
+            { id: 'q12', icon: '🔒', title: 'Como a LGPD impacta a saúde na prática?', answer: `**A Lei Geral de Proteção de Dados (LGPD) na Saúde**\n\nDados médicos (doenças, psiquiatria, tratamentos) são **Dados Pessoais Sensíveis**. A gestão precisou garantir segurança pesada. \n\n*Exemplo Prático:* Se a tela do computador ficar virada para o corredor e as pessoas virem o diagnóstico de um vizinho, ou se o médico emprestar sua senha para a enfermeira, a prefeitura pode sofrer sanções pesadíssimas. É exigido rastreabilidade total.` },
+            { id: 'q13', icon: '🛡️', title: 'Quem pode ter acesso aos dados sensíveis dos pacientes?', answer: `**O Princípio da Necessidade**\n\nO sistema deve bloquear acessos indevidos. Funciona assim:\n- **A Recepção da UBS:** Acessa apenas a agenda e dados cadastrais (nome, telefone, endereço).\n- **O Médico/Enfermeiro:** Acessa o prontuário clínico detalhado do paciente.\n- **O Secretário de Saúde (Gestor):** Não acessa o nome de ninguém. Ele acessa **dados agrupados/anonimizados** (Ex: "Há 40 pessoas com gripe na UBS do Centro") para montar políticas públicas.` },
+            { id: 'q14', icon: '📊', title: 'Como a digitalização ajuda na gestão pública?', answer: `**Decisões Baseadas em Evidências**\n\nAntes, o planejamento era "no chute". A digitalização traz estatísticas em tempo real. O Secretário de Saúde sabe exatamente qual bairro tem o maior índice de diabetes, permitindo focar palestras educativas e comprar a quantidade **exata** de insulina, economizando e otimizando o dinheiro público (princípio da eficiência).` },
+            { id: 'q15', icon: '❌', title: 'O Informatiza APS foi considerado um fracasso?', answer: `**De modo algum! Foi um sucesso histórico.**\n\nEm poucos anos, ele forçou mais de 4.000 municípios brasileiros a darem adeus ao papel. O Tribunal de Contas da União (TCU) reconheceu que as cidades que aderiram de forma correta ao programa melhoraram substancialmente seus indicadores e o acompanhamento de hipertensos e diabéticos.` },
+            { id: 'q16', icon: '📂', title: 'Qual era o problema do "Caos do Papel" no SUS?', answer: `**O Apagão Analógico**\n\nAs UBS brasileiras conviviam com salas lotadas de armários e fichas que muitas vezes rasgavam, mofavam ou sofriam perdas por enchentes/insetos. Um paciente que mudava de bairro perdia todo seu histórico de 20 anos. O papel era lento, ocupava espaço físico caríssimo e inviabilizava a criação de estatísticas para a gestão pública.` },
+            { id: 'q17', icon: '🎯', title: 'Qual a principal estratégia do Governo na época?', answer: `**A Indução Financeira (Cofinanciamento)**\n\nFoi a estratégia mais brilhante da gestão: O Ministério da Saúde percebeu que apenas mandar um decreto dizendo "usem computador" não surtiria efeito. Ao atrelar a transformação tecnológica diretamente ao **recebimento de dinheiro** no orçamento da prefeitura, o programa forçou a engrenagem política local a se modernizar.` },
+            { id: 'q18', icon: '🧩', title: 'Por que a interoperabilidade de dados é importante?', answer: `**Sistemas Falando a Mesma Língua**\n\nInteroperabilidade é a capacidade de sistemas diferentes "conversarem". Sem ela, se a cidade A comprasse um sistema privado e a cidade B comprasse outro, elas nunca poderiam trocar o histórico do paciente. O Governo precisou criar padrões rígidos (Modelos de Informação) para que todos os softwares no Brasil mandassem o dado no mesmo formato.` },
+            { id: 'q19', icon: '👩‍🏫', title: 'Qual o papel da Educação Permanente?', answer: `**Capacitação Contínua**\n\nEducação Permanente em Saúde não é "dar uma palestra de 2 horas sobre como usar o mouse". É acompanhar o servidor no seu dia a dia, ouvir suas críticas sobre o sistema e capacitá-lo continuamente para que ele enxergue o Prontuário Eletrônico como uma ferramenta que o ajuda, e não como uma obrigação burocrática.` },
+            { id: 'q20', icon: '💡', title: 'Quais as principais dicas para a Avaliação Final?', answer: `**Dicas de Ouro do Tutor:**\n\n1. Lembre-se sempre que a maior arma do Governo no Informatiza APS foi a vinculação da verba ao **envio contínuo de dados** digitais.\n2. Lembre-se que o "Fator Humano" (falta de treinamento) é uma barreira tão grande quanto a falta de internet.\n3. Lembre-se que a revogação do programa **não** ocorreu por fracasso, mas sim por uma evolução metodológica (SUS Digital) do Governo Federal em 2024.` }
+        ];
+
+        // Renderização dos botões FAQ
+        function renderFaqButtons() {
+            const container = document.getElementById('faqButtonsContainer');
+            if(!container) return;
+            container.innerHTML = faqDatabase.map(faq => `
+                <button onclick="askQuickQuestion('${faq.id}')" class="flex items-center gap-3 w-full text-left px-3.5 py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-emerald-500 hover:bg-emerald-50 dark:hover:bg-slate-700 rounded-xl transition-all shadow-sm active:scale-95 group">
+                    <span class="text-xl shrink-0 group-hover:scale-110 transition-transform">${faq.icon}</span>
+                    <span class="flex-1 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-200">${faq.title}</span>
+                </button>
+            `).join('');
+        }
+
+        function askQuickQuestion(questionId) {
+            if (state.isAIProcessing) return;
+            
+            // Busca a pergunta na database
+            const questionData = faqDatabase.find(q => q.id === questionId);
+            if (!questionData) return;
+
+            sendAIChatMessage(questionData.title, questionData.answer);
+        }
+
+        function clearAIChat() {
+            if (state.isAIProcessing) return;
+            const chatWindow = document.getElementById('aiChatWindow');
+            chatWindow.innerHTML = `
+                <div class="flex items-start gap-2.5 sm:gap-3">
+                    <div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-sm">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div class="p-3.5 sm:p-4 rounded-2xl rounded-tl-none bg-slate-100 dark:bg-slate-800 text-xs sm:text-sm text-slate-800 dark:text-slate-200 max-w-[92%] sm:max-w-[85%] leading-relaxed shadow-sm space-y-2 ai-response-content">
+                        <p class="font-semibold text-emerald-700 dark:text-emerald-400">
+                            🔄 Histórico reiniciado com sucesso!
+                        </p>
+                        <p>
+                            Basta clicar em qualquer uma das perguntas no menu ao lado para começarmos!
+                        </p>
+                    </div>
+                </div>
+            `;
+            playSound('click');
+        }
+
+        function sendAIChatMessage(userTitle, botAnswer) {
+            if (state.isAIProcessing) return;
+
+            state.isAIProcessing = true;
+            
+            // Desabilita botões temporariamente
+            const actionBtns = document.querySelectorAll('#faqButtonsContainer button');
+            actionBtns.forEach(b => { b.style.opacity = '0.6'; b.disabled = true; });
+
+            const chatWindow = document.getElementById('aiChatWindow');
+
+            // Renderiza Mensagem do Usuário (O Título da Pergunta Clicada)
+            chatWindow.innerHTML += `
+                <div class="flex items-start justify-end gap-3">
+                    <div class="p-3.5 rounded-2xl rounded-tr-none bg-brand-600 text-white text-xs sm:text-sm max-w-[85%] leading-relaxed shadow-sm font-medium">
+                        ${userTitle}
+                    </div>
+                    <div class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 flex items-center justify-center font-bold text-xs shrink-0 shadow-sm">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                </div>
+            `;
+
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+            playSound('click');
+            
+            // Render Bot Thinking Indicator
+            const loadingId = 'loading-' + Date.now();
+            chatWindow.innerHTML += `
+                <div id="${loadingId}" class="flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-sm">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div class="p-3.5 rounded-2xl rounded-tl-none bg-slate-100 dark:bg-slate-800 text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-[85%] shadow-sm flex items-center gap-2">
+                        <i class="fa-solid fa-circle-notch animate-spin text-emerald-500"></i>
+                        <span>A Assistente está digitando...</span>
+                    </div>
+                </div>
+            `;
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+
+            // Simula o tempo de digitação/raciocínio para engajamento (meio segundo)
+            setTimeout(() => {
+                const loadingEl = document.getElementById(loadingId);
+                if (loadingEl) loadingEl.remove();
+
+                const formattedResponse = formatMarkdownToHTML(botAnswer);
+
+                chatWindow.innerHTML += `
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-sm">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+                        <div class="p-3.5 sm:p-4 rounded-2xl rounded-tl-none bg-slate-100 dark:bg-slate-800 text-xs sm:text-sm text-slate-800 dark:text-slate-200 max-w-[88%] sm:max-w-[85%] leading-relaxed shadow-sm border border-slate-200/50 dark:border-slate-700/50 ai-response-content">
+                            ${formattedResponse}
+                        </div>
+                    </div>
+                `;
+                
+                chatWindow.scrollTop = chatWindow.scrollHeight;
+                playSound('success');
+                
+                // Reabilita os botões de perguntas
+                state.isAIProcessing = false;
+                actionBtns.forEach(b => { b.style.opacity = '1'; b.disabled = false; });
+
+            }, 600); // 600ms de delay de digitação
+        }
+
+        // Initialize App
+        window.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            updateProgressUI();
+            renderFaqButtons(); // Injeta os 20 botões na barra lateral
+        });
+    </script>
+</body>
+</html>
